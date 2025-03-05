@@ -8,7 +8,7 @@ from dify_plugin.entities.tool import ToolInvokeMessage
 
 class SQLExecuteTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
-        db_uri = self.runtime.credentials.get("db_uri")
+        db_uri = tool_parameters.get("db_uri") or self.runtime.credentials.get("db_uri")
         db = records.Database(db_uri)
         query = tool_parameters.get("query").strip().lower()
         format = tool_parameters.get("format", "json")

@@ -29,8 +29,7 @@ parameters:
     human_description:
       en_US: Choose the output format.
       zh_Hans: 选择输出格式。
-    llm_description: Choose the output format. It can be one of `json`, `csv`, `yaml`, `md`, `xlsx`, `html`.
-    form: llm
+    form: form
     default: json
     options:
       - value: json
@@ -57,6 +56,15 @@ parameters:
         label:
           en_US: HTML
           zh_Hans: HTML
+  - name: db_uri
+    type: string
+    required: false
+    label:
+      en_US: DB URI
+    human_description:
+      en_US: Optional, Filling in this field will overwrite the database connection entered during authorization. For example `mysql://<user>:<password>@<host>:<port>/<database>`
+      zh_Hans: 选填，填写后将覆盖授权时填写的数据库连接。例如 `mysql://<user>:<password>@<host>:<port>/<database>`
+    form: form
 extra:
   python:
     source: tools/sql_execute.py
