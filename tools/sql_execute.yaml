@@ -57,7 +57,7 @@ parameters:
           en_US: HTML
           zh_Hans: HTML
   - name: db_uri
-    type: string
+    type: secret-input
     required: false
     label:
       en_US: DB URI
