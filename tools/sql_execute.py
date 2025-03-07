@@ -10,11 +10,11 @@ class SQLExecuteTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         db_uri = tool_parameters.get("db_uri") or self.runtime.credentials.get("db_uri")
         db = records.Database(db_uri)
-        query = tool_parameters.get("query").strip().lower()
+        query = tool_parameters.get("query").strip()
         format = tool_parameters.get("format", "json")
 
         
-        if query.startswith('select'):
+        if query.lower().startswith('select'):
             rows = db.query(query)
             if format == 'json':
                 result = rows.as_dict()
