@@ -6,6 +6,9 @@
 **Repo:** [https://github.com/hjlarry/dify-plugin-database](https://github.com/hjlarry/dify-plugin-database)  
 **Feature Request:** [issues](https://github.com/hjlarry/dify-plugin-database/issues)
 
+### Be Carefull!
+**The sql_execute tool can run any SQL query; for enhanced security, always use a read-only database account.**
+
 ### Description
 
 A database tool make it easy to query data from existing databases.
