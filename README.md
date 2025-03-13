@@ -49,6 +49,7 @@ curl -X POST 'https://daemon-plugin.dify.dev/o3wvwZfYFLU5iGopr5CxYmGaM5mWV7xf/sq
 #### 0.0.3
 1. add `cryptography` to requirements.txt to support mysql 8.1 sha256 link
 2. remove database uri setting of the endpoint
-3. add a `db_uri` to the sql_execute tool to support link to multiple databases
+3. add a `db_uri` to support link to multiple databases
 4. change the `output` of sql_execute tool to a form format
-5. fix sql query being converted to lowercase [issue](https://github.com/hjlarry/dify-plugin-database/issues/2)
+5. change the `tables` of text2sql tool to a llm format
+6. fix sql query being converted to lowercase [issue](https://github.com/hjlarry/dify-plugin-database/issues/2)

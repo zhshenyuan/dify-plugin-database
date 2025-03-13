@@ -53,7 +53,7 @@ Your response: SELECT * FROM Track WHERE GenreId = (SELECT GenreId FROM Genre WH
 
 class QueryTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
-        db_uri = self.runtime.credentials.get("db_uri")
+        db_uri = tool_parameters.get("db_uri") or self.runtime.credentials.get("db_uri")
         engine = create_engine(db_uri)
         inspector = inspect(engine)
         dialect = engine.dialect.name
