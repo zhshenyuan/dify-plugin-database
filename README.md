@@ -1,7 +1,7 @@
 ## database
 
 **Author:** hjlarry  
-**Version:** 0.0.3  
+**Version:** 0.0.4  
 **Type:** extension   
 **Repo:** [https://github.com/hjlarry/dify-plugin-database](https://github.com/hjlarry/dify-plugin-database)  
 **Feature Request:** [issues](https://github.com/hjlarry/dify-plugin-database/issues)
@@ -25,6 +25,8 @@ sqlite:///test.db
 mssql+pymssql://<username>:<password>@<freetds_name>/?charset=utf8
 oracle+oracledb://user:pass@hostname:port[/dbname][?service_name=<service>[&key=value&key=value...]]
 ```
+
+> **Note:**: this plugin always run in a docker, so the `localhost` always means docker internal network, try `host.docker.internal` instead.
 
 #### 2. Use the `SQL Execute` tool to query data from the database.
 ![sql](./_assets/sql_execute.png)
