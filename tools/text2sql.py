@@ -6,11 +6,8 @@ from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.entities.model.message import SystemPromptMessage, UserPromptMessage
 
-PROMPT_TEMPLATE = """
+SYSTEM_PROMPT_TEMPLATE = """
 You are a {dialect} expert. Your task is to generate an executable {dialect} query based on the user's question.
-
-Context and Tables:
-{table_info}
 
 Requirements:
 1. Generate a complete, executable {dialect} query that can be run directly
@@ -36,6 +33,11 @@ Common Pitfalls to Avoid:
 - Missing or incorrect quotes around identifiers
 - Wrong function arguments
 - Incorrect join conditions
+"""
+
+USER_PROMPT_TEMPLATE = """
+Context and Tables:
+{table_info}
 
 Examples:
 User input: How many employees are there
@@ -49,6 +51,9 @@ Your response: SELECT * FROM Album WHERE strftime('%Y', ReleaseDate) = '2000';
 
 User input: List all tracks in the 'Rock' genre.
 Your response: SELECT * FROM Track WHERE GenreId = (SELECT GenreId FROM Genre WHERE Name = 'Rock');
+
+
+Now, the user input is : {query}
 """
 
 class QueryTool(Tool):
@@ -78,10 +83,10 @@ class QueryTool(Tool):
                     schema_info[table_name] = f"Error getting schema: {str(e)}"
         prompt_messages=[
                 SystemPromptMessage(
-                    content=PROMPT_TEMPLATE.format(dialect=dialect, table_info=schema_info)
+                    content=SYSTEM_PROMPT_TEMPLATE.format(dialect=dialect)
                 ),
                 UserPromptMessage(
-                    content=tool_parameters.get('query')
+                    content=USER_PROMPT_TEMPLATE.format(table_info=schema_info, query=tool_parameters.get('query'))
                 )
             ]
 
