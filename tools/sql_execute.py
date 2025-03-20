@@ -18,8 +18,7 @@ class SQLExecuteTool(Tool):
             rows = db.query(query)
             if format == 'json':
                 result = rows.as_dict()
-                for r in result:
-                    yield self.create_json_message(r)
+                yield self.create_json_message({"result": result})
             elif format == 'md':
                 result = str(rows.dataset)
                 yield self.create_text_message(result)

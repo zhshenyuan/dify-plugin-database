@@ -17,11 +17,13 @@ You can get different format of data, like `json`, `csv`, `yaml`, `xlsx`, `html`
 
 ### Usage
 
-#### 1. Input a databaseURI for Authorization. Now support `mysql`, `postgresql`, `sqlite`, example format:
+#### 1. Input a databaseURI for Authorization. Now support `mysql`, `postgresql`, `sqlite`, `sqlserver`, `oracle`, example format:
 ```shell
 mysql+pymysql://root:123456@localhost:3306/test
 postgresql+psycopg2://postgres:123456@localhost:5432/test
 sqlite:///test.db
+mssql+pymssql://<username>:<password>@<freetds_name>/?charset=utf8
+oracle+oracledb://user:pass@hostname:port[/dbname][?service_name=<service>[&key=value&key=value...]]
 ```
 
 #### 2. Use the `SQL Execute` tool to query data from the database.
@@ -45,6 +47,11 @@ curl -X POST 'https://daemon-plugin.dify.dev/o3wvwZfYFLU5iGopr5CxYmGaM5mWV7xf/sq
 
 
 ### Changelog
+
+#### 0.0.4
+1. support `sqlserver`, `oracle` connection
+2. change `db_url` to a llm format, so that user can use a environment variable of workflow to set the database uri
+3. fix in a agent app, `sql_execute` tool only response the first result
 
 #### 0.0.3
 1. add `cryptography` to requirements.txt to support mysql 8.1 sha256 link

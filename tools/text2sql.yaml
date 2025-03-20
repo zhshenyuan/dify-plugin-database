@@ -48,9 +48,9 @@ parameters:
     label:
       en_US: DB URI
     human_description:
-      en_US: Optional, Filling in this field will overwrite the database connection entered during authorization. For example `mysql://<user>:<password>@<host>:<port>/<database>`
-      zh_Hans: 选填，填写后将覆盖授权时填写的数据库连接。例如 `mysql://<user>:<password>@<host>:<port>/<database>`
-    form: form
+      en_US: Optional, Filling in this field will overwrite the database connection entered during authorization.
+      zh_Hans: 选填，填写后将覆盖授权时填写的数据库连接。
+    form: llm
 extra:
   python:
       source: tools/text2sql.py
