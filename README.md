@@ -63,3 +63,7 @@ curl -X POST 'https://daemon-plugin.dify.dev/o3wvwZfYFLU5iGopr5CxYmGaM5mWV7xf/sq
 4. change the `output` of sql_execute tool to a form format
 5. change the `tables` of text2sql tool to a llm format
 6. fix sql query being converted to lowercase [issue](https://github.com/hjlarry/dify-plugin-database/issues/2)
+
+
+### Contact
+![1](_assets/contact.jpg)
