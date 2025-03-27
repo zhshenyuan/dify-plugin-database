@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: FAQ 文档
+    url: https://github.com/langgenius/dify-plugin-database/blob/main/FAQ.md
+    about: 在创建 issue 之前，请先查看我们的 FAQ 文档
