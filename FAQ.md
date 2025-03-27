@@ -4,12 +4,12 @@
 你是应该是用`mysql+pymysql://`去连接，而不是`mysql://`
 
 ## 2. 密码中有 `@` 怎么办
-`@` 是URL中的保留字符，需要使用 `%40` 代替，例如 `123%40456
+`@` 是URL中的保留字符，需要使用 `%40` 代替，例如 `123%40456`
 
 ## 3. `text2sql`工具生成的sql语句无法运行
 主要是模型的指令遵循能力不强，生成的sql格式不准确，建议换模型。或者针对它生成的sql语句，加一个代码节点进行修改，目前常见的模型生成sql语句错误有前面多了`sql`字符串，生成的sql都有`limit 5`，双引号格式问题等。
 
-## 4. 安装本地插件或github版本报错 `PluginDaemonBadRequestError: plugin verification has been enabled, and the plugin you want to install has a bad signature`
+## 4. 安装本地插件或github版本报错 `PluginDaemonBadRequestError`
 找环境变量设置 `FORCE_VERIFYING_SIGNATURE=false`
 
 ## 5. 如何安装离线版本

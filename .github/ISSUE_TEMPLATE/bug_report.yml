@@ -1,0 +1,33 @@
+name: Bug 报告
+description: 创建一个 bug 报告以帮助我们改进
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ### ⚠️ 重要提示
+        在提交 issue 之前，请先查看 [FAQ](../FAQ.md) 文档，很多常见问题在那里都能找到解答。
+        特别是以下常见问题：
+        - No module named 'MySQLdb' 错误
+        - 数据库密码包含 @ 符号
+        - text2sql 工具生成的 SQL 语句问题
+        - PluginDaemonBadRequestError 错误
+        - 数据库连接问题
+        - Oracle 连接问题
+
+  - type: checkboxes
+    attributes:
+      label: 在提交之前，请确认
+      options:
+        - label: 我已经查看了 FAQ 文档，但没有找到解决方案
+          required: true
+
+  - type: textarea
+    attributes:
+      label: 问题描述
+      description: 请清晰简洁地描述你遇到的问题
+    validations:
+      required: true
+
+
+
