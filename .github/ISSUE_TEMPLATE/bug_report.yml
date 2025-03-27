@@ -6,7 +6,7 @@ body:
     attributes:
       value: |
         ### ⚠️ 重要提示
-        在提交 issue 之前，请先查看 [FAQ](../FAQ.md) 文档，很多常见问题在那里都能找到解答。
+        在提交 issue 之前，请先查看 [FAQ](https://github.com/hjlarry/dify-plugin-database/blob/main/FAQ.md) 文档，很多常见问题在那里都能找到解答。
         特别是以下常见问题：
         - No module named 'MySQLdb' 错误
         - 数据库密码包含 @ 符号
