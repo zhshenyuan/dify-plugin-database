@@ -16,8 +16,8 @@ extra:
 credentials_for_provider:
   db_uri:
     help:
-      en_US: For example `mysql://<user>:<password>@<host>:<port>/<database>`
-      zh_Hans: 例如 `mysql://<user>:<password>@<host>:<port>/<database>`
+      en_US: For example `mysql+pymysql://<user>:<password>@<host>:<port>/<database>`
+      zh_Hans: 例如 `mysql+pymysql://<user>:<password>@<host>:<port>/<database>`
     label:
       en_US: Database URI
       zh_Hans: 数据库 URI
