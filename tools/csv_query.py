@@ -11,7 +11,6 @@ class CSVQueryTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         file = tool_parameters.get("file")
         df = pd.read_csv(file)
-        
+
         engine = create_engine("sqlite:///csv.db")
         df.to_sql("csv", engine, index=False)
-

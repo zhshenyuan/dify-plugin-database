@@ -167,3 +167,4 @@ cython_debug/
 .git/
 test.db
 .DS_Store
+_assets/contact.jpg

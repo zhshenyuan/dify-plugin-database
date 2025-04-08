@@ -50,6 +50,11 @@ curl -X POST 'https://daemon-plugin.dify.dev/o3wvwZfYFLU5iGopr5CxYmGaM5mWV7xf/sq
 
 ### Changelog
 
+#### 0.0.5
+1. support `with` in sql query
+2. fix `text2sql` generate double quotes sql string
+3. fix  `too many clients already`
+
 #### 0.0.4
 1. support `sqlserver`, `oracle` connection
 2. change `db_url` to a llm format, so that user can use a environment variable of workflow to set the database uri

@@ -12,7 +12,7 @@ You are a {dialect} expert. Your task is to generate an executable {dialect} que
 Requirements:
 1. Generate a complete, executable {dialect} query that can be run directly
 2. Query only necessary columns
-3. Wrap column names in double quotes (") as delimited identifiers
+3. Don't wrap column names in double quotes (") as delimited identifiers
 4. Unless specified, limit results to 5 rows
 5. Use date('now') for current date references
 6. The response format should not include special characters like ```, \n, \", etc.
@@ -56,6 +56,7 @@ Your response: SELECT * FROM Track WHERE GenreId = (SELECT GenreId FROM Genre WH
 Now, the user input is : {query}
 """
 
+
 class QueryTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         db_uri = tool_parameters.get("db_uri") or self.runtime.credentials.get("db_uri")
@@ -68,31 +69,34 @@ class QueryTool(Tool):
 
         schema_info = {}
         with engine.connect() as _:
-            
+
             for table_name in tables:
                 try:
                     columns = inspector.get_columns(table_name)
-                    schema_info[table_name] = [{
-                        "name": col["name"],
-                        "type": str(col["type"]),
-                        "nullable": col.get("nullable", True),
-                        "default": col.get("default"),
-                        "primary_key": col.get("primary_key", False)
-                    } for col in columns]
+                    schema_info[table_name] = [
+                        {
+                            "name": col["name"],
+                            "type": str(col["type"]),
+                            "nullable": col.get("nullable", True),
+                            "default": col.get("default"),
+                            "primary_key": col.get("primary_key", False),
+                        }
+                        for col in columns
+                    ]
                 except Exception as e:
                     schema_info[table_name] = f"Error getting schema: {str(e)}"
-        prompt_messages=[
-                SystemPromptMessage(
-                    content=SYSTEM_PROMPT_TEMPLATE.format(dialect=dialect)
-                ),
-                UserPromptMessage(
-                    content=USER_PROMPT_TEMPLATE.format(table_info=schema_info, query=tool_parameters.get('query'))
+        prompt_messages = [
+            SystemPromptMessage(content=SYSTEM_PROMPT_TEMPLATE.format(dialect=dialect)),
+            UserPromptMessage(
+                content=USER_PROMPT_TEMPLATE.format(
+                    table_info=schema_info, query=tool_parameters.get("query")
                 )
-            ]
+            ),
+        ]
 
         response = self.session.model.llm.invoke(
-          model_config=tool_parameters.get('model'),
-          prompt_messages=prompt_messages,
-          stream=False
+            model_config=tool_parameters.get("model"),
+            prompt_messages=prompt_messages,
+            stream=False,
         )
         yield self.create_text_message(response.message.content)
