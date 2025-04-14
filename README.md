@@ -2,9 +2,10 @@
 
 **Author:** hjlarry  
 **Version:** 0.0.5  
-**Type:** extension   
+**Type:** tool   
 **Repo:** [https://github.com/hjlarry/dify-plugin-database](https://github.com/hjlarry/dify-plugin-database)  
 **Feature Request:** [issues](https://github.com/hjlarry/dify-plugin-database/issues)
+**中文文档** [README_CN.md](README_CN.md)
 
 ### Be Carefull!
 **The sql_execute tool can run any SQL query; for enhanced security, always use a read-only database account.**
@@ -44,7 +45,7 @@ This tool will use the default prompt [here](https://github.com/hjlarry/dify-plu
 If the `Text to SQL` tool can't generate a helpful sql query, you can use this tool to get the schema of tables, then use the schema orginze with your own prompt or other information to a LLM node to generate a helpful sql query. 
 
 #### 5. The `CSV Query` tool can execute a sql query from a csv file.
-![csv](./_assets/csv.png)
+![csv](./_assets/csv.png)  
 The table name is always `csv`,  the column name is the csv file's first line. It support output `json` and `md`.
 
 #### 6. Use the `endpoint` tool to get the data from a url request.
