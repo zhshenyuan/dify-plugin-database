@@ -43,7 +43,11 @@ This tool will use the default prompt [here](https://github.com/hjlarry/dify-plu
 
 If the `Text to SQL` tool can't generate a helpful sql query, you can use this tool to get the schema of tables, then use the schema orginze with your own prompt or other information to a LLM node to generate a helpful sql query. 
 
-#### 5. Use the `endpoint` tool to get the data from a url request.
+#### 5. The `CSV Query` tool can execute a sql query from a csv file.
+![csv](./_assets/csv.png)
+The table name is always `csv`,  the column name is the csv file's first line. It support output `json` and `md`.
+
+#### 6. Use the `endpoint` tool to get the data from a url request.
 
 example url request format:
 ```shell
@@ -59,6 +63,8 @@ curl -X POST 'https://daemon-plugin.dify.dev/o3wvwZfYFLU5iGopr5CxYmGaM5mWV7xf/sq
 3. fix  `too many clients already`
 4. add connect option of sqlalchemy
 5. change the `db_uri` of authorization to an optional field
+6. add a `Get Table Schema` to directly response the schema of tables
+7. add a `CSV Query` tool to execute a sql query from a csv file
 
 #### 0.0.4
 1. support `sqlserver`, `oracle` connection
