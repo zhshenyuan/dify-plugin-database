@@ -42,7 +42,7 @@ oracle+oracledb://user:pass@hostname:port[/dbname][?service_name=<service>[&key=
 
 #### 4. 使用 `获取表模式` (Get Table Schema) 工具可以获取表的结构（schema）。
 
-如果 `文本转 SQL` 工具无法生成有用的 SQL 查询，您可以使用此工具获取表的结构，然后将该结构与您自己的提示词或其他信息结合，输入到 LLM 节点以生成有用的 SQL 查询。
+如果 `文本转 SQL` 工具无法生成有用的 SQL 查询，您可以使用此工具获取表的结构(在text字段中返回)，然后将该结构与您自己的提示词或其他信息结合，输入到 LLM 节点以生成有用的 SQL 查询。
 
 #### 5. `CSV 查询` (CSV Query) 工具可以对 CSV 文件执行 SQL 查询。
 ![csv](./_assets/csv.png)

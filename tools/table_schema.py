@@ -1,5 +1,6 @@
 from collections.abc import Generator
 from typing import Any
+import json
 
 from sqlalchemy import create_engine, inspect
 from dify_plugin import Tool
@@ -34,4 +35,4 @@ class QueryTool(Tool):
                     ]
                 except Exception as e:
                     schema_info[table_name] = f"Error getting schema: {str(e)}"
-        yield self.create_json_message(json=schema_info)
+        yield self.create_text_message(json.dumps(schema_info, ensure_ascii=False))
