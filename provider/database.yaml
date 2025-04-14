@@ -24,5 +24,5 @@ credentials_for_provider:
     placeholder:
       en_US: Please enter the database URI
       zh_Hans: 请输入数据库 URI
-    required: true
+    required: false
     type: secret-input

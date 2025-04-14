@@ -23,3 +23,8 @@ dify每个节点对接收的变量类型有限制，比如`直接回复`这个�
 
 ## 8. oracle连接问题
 参考 https://docs.sqlalchemy.org/en/20/dialects/oracle.html#module-sqlalchemy.dialects.oracle.oracledb
+
+## 9. SQL Server连接问题
+连接不上时，可以在数据库连接配置选项中添加tds参数尝试，例如 {"connect_args": {"tds_version": "7.0"}}
+不同的sqlserver版本对应不同的tds版本，具体列表可查看 https://www.freetds.org/userguide/ChoosingTdsProtocol.html#tab.Protocol.by.Product
+感谢群友Alpha提供的解决方案  

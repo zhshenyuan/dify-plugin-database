@@ -7,6 +7,8 @@ from tools.sql_execute import SQLExecuteTool
 
 class DatabaseProvider(ToolProvider):
     def _validate_credentials(self, credentials: dict[str, Any]) -> None:
+        if not credentials.get("db_uri"):
+            return
         try:
             for _ in SQLExecuteTool.from_credentials(credentials).invoke(
                 tool_parameters={"query": "select 1"}
