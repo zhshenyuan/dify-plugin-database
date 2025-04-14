@@ -166,5 +166,6 @@ cython_debug/
 .vscode/
 .git/
 test.db
+csv.db
 .DS_Store
 _assets/contact.jpg
