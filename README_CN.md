@@ -1,11 +1,11 @@
 ## 数据库
 
-**作者：** hjlarry
-**版本：** 0.0.5
-**类型：** 工具
-**仓库：** [https://github.com/hjlarry/dify-plugin-database](https://github.com/hjlarry/dify-plugin-database)
-**功能请求：** [issues](https://github.com/hjlarry/dify-plugin-database/issues)
-**FAQ：** [FAQ](FAQ.md)
+**作者：** hjlarry  
+**版本：** 0.0.5  
+**类型：** 工具  
+**仓库：** [https://github.com/hjlarry/dify-plugin-database](https://github.com/hjlarry/dify-plugin-database)  
+**功能请求：** [issues](https://github.com/hjlarry/dify-plugin-database/issues)  
+**FAQ：** [FAQ](FAQ.md)  
 
 ### 请注意！
 **`sql_execute` 工具可以运行任何 SQL 查询；为了增强安全性，请始终使用只读数据库账户。**

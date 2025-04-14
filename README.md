@@ -4,7 +4,7 @@
 **Version:** 0.0.5  
 **Type:** tool   
 **Repo:** [https://github.com/hjlarry/dify-plugin-database](https://github.com/hjlarry/dify-plugin-database)  
-**Feature Request:** [issues](https://github.com/hjlarry/dify-plugin-database/issues)
+**Feature Request:** [issues](https://github.com/hjlarry/dify-plugin-database/issues)  
 **中文文档** [README_CN.md](README_CN.md)
 
 ### Be Carefull!
