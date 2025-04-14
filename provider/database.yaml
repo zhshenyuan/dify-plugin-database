@@ -10,6 +10,7 @@ identity:
 tools:
   - tools/sql_execute.yaml
   - tools/text2sql.yaml
+  - tools/table_schema.yaml
 extra:
   python:
     source: provider/database.py

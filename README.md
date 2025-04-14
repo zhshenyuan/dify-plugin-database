@@ -1,7 +1,7 @@
 ## database
 
 **Author:** hjlarry  
-**Version:** 0.0.4  
+**Version:** 0.0.5  
 **Type:** extension   
 **Repo:** [https://github.com/hjlarry/dify-plugin-database](https://github.com/hjlarry/dify-plugin-database)  
 **Feature Request:** [issues](https://github.com/hjlarry/dify-plugin-database/issues)
@@ -39,8 +39,11 @@ If you input the `DB URI` field, it will overwrite the default authorization uri
 
 This tool will use the default prompt [here](https://github.com/hjlarry/dify-plugin-database/blob/d6dd3695840e8eb5d673611784af148b1789da97/tools/text2sql.py#L9) to generate a sql query. If you specify the `TABLES` field, it will only get those tables' schema into the LLM context.
 
+#### 4. Use the `Get Table Schema` tool can get the schema of tables.
 
-#### 4. Use the `endpoint` tool to get the data from a url request.
+If the `Text to SQL` tool can't generate a helpful sql query, you can use this tool to get the schema of tables, then use the schema orginze with your own prompt or other information to a LLM node to generate a helpful sql query. 
+
+#### 5. Use the `endpoint` tool to get the data from a url request.
 
 example url request format:
 ```shell

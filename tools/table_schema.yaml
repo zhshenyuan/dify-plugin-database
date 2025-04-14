@@ -1,0 +1,34 @@
+identity:
+  name: table_schema
+  author: hjlarry
+  label:
+    en_US: Get Table Schema
+description:
+  human:
+    en_US: get the table schema from the database.
+    zh_Hans: 从数据库中获取表结构。
+  llm: get the table schema from the database.
+parameters:
+  - name: tables
+    type: string
+    required: false
+    label:
+      en_US: Tables
+      zh_Hans: 表
+    human_description:
+      en_US: Specify which tables schema you want to get. If not specified, all tables will be used. Multi tables use comma to separate.
+      zh_Hans: 指定想要哪些表的结构，如不指定，则使用所有表。多张表用半角逗号隔开。
+    llm_description: Specify which tables schema you want to get. If not specified, all tables will be used. Multi tables use comma to separate.
+    form: llm
+  - name: db_uri
+    type: secret-input
+    required: false
+    label:
+      en_US: DB URI
+    human_description:
+      en_US: Optional, Filling in this field will overwrite the database connection entered during authorization.
+      zh_Hans: 选填，填写后将覆盖授权时填写的数据库连接。
+    form: llm
+extra:
+  python:
+      source: tools/table_schema.py
