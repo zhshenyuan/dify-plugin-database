@@ -66,6 +66,7 @@ curl -X POST 'https://daemon-plugin.dify.dev/o3wvwZfYFLU5iGopr5CxYmGaM5mWV7xf/sq
 5. change the `db_uri` of authorization to an optional field
 6. add a `Get Table Schema` to directly response the schema of tables
 7. add a `CSV Query` tool to execute a sql query from a csv file
+8. fix `oracle` authorization can't run `select 1`
 
 #### 0.0.4
 1. support `sqlserver`, `oracle` connection
