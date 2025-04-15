@@ -11,7 +11,14 @@ from dify_plugin.entities.tool import ToolInvokeMessage
 class QueryTool(Tool):
     def _invoke(self, tool_parameters: dict[str, Any]) -> Generator[ToolInvokeMessage]:
         db_uri = tool_parameters.get("db_uri") or self.runtime.credentials.get("db_uri")
-        engine = create_engine(db_uri)
+        if not db_uri:
+            raise ValueError("Database URI is not provided.")
+        config_options = tool_parameters.get("config_options") or "{}"
+        try:
+            config_options = json.loads(config_options)
+        except json.JSONDecodeError:
+            raise ValueError("Invalid JSON format for Connect Config")
+        engine = create_engine(db_uri, **config_options)
         inspector = inspect(engine)
 
         tables = tool_parameters.get("tables")
