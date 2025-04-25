@@ -1,4 +1,4 @@
-version: 0.0.5
+version: 0.0.6
 type: plugin
 author: hjlarry
 name: database
@@ -8,10 +8,8 @@ label:
   zh_Hans: database
   pt_BR: database
 description:
-  en_US: This tool is used to execute SQL in an existing database.
-  ja_JP: This tool is used to execute SQL in an existing database.
-  zh_Hans: This tool is used to execute SQL in an existing database.
-  pt_BR: This tool is used to execute SQL in an existing database.
+  en_US: This tool is used to execute SQL and text2sql in an existing database.
+  zh_Hans: 此工具可以用来连接现有数据库，并执行SQL语句和自然语言转SQL。
 icon: icon.svg
 resource:
   memory: 268435456

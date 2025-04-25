@@ -5,7 +5,7 @@
 **Type:** tool   
 **Repo:** [https://github.com/hjlarry/dify-plugin-database](https://github.com/hjlarry/dify-plugin-database)  
 **Feature Request:** [issues](https://github.com/hjlarry/dify-plugin-database/issues)  
-**中文文档** [README_CN.md](README_CN.md)
+**中文文档** [README_CN.md](https://github.com/hjlarry/dify-plugin-database/blob/main/README_CN.md)
 
 ### Be Carefull!
 **The sql_execute tool can run any SQL query; for enhanced security, always use a read-only database account.**
@@ -57,6 +57,10 @@ curl -X POST 'https://daemon-plugin.dify.dev/o3wvwZfYFLU5iGopr5CxYmGaM5mWV7xf/sq
 
 
 ### Changelog
+
+#### 0.0.6
+1. support get more table info of `get table schema` tool
+2. support special `schema` of `get table schema` tool
 
 #### 0.0.5
 1. support `with` in sql query

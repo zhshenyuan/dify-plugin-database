@@ -1,7 +1,7 @@
 ## 数据库
 
 **作者：** hjlarry  
-**版本：** 0.0.5  
+**版本：** 0.0.6  
 **类型：** 工具  
 **仓库：** [https://github.com/hjlarry/dify-plugin-database](https://github.com/hjlarry/dify-plugin-database)  
 **功能请求：** [issues](https://github.com/hjlarry/dify-plugin-database/issues)  
@@ -56,6 +56,10 @@ curl -X POST 'https://daemon-plugin.dify.dev/o3wvwZfYFLU5iGopr5CxYmGaM5mWV7xf/sq
 ```
 
 ### 更新日志
+
+#### 0.0.6
+1. 支持在 `get table schema` 工具中获取更多信息，例如表和字段的注释、外键关联索引等
+2. support special `schema` of `get table schema` tool
 
 #### 0.0.5
 1. 支持 SQL 查询中的 `with` 语句

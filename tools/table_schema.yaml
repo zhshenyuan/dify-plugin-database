@@ -43,6 +43,15 @@ parameters:
       zh_Hans: |
         选填项。例如 {"connect_args": {"ssl": {"ca": "/path/to/ca.pem"}}}
         更多连接选项可参考 https://docs.sqlalchemy.org/en/20/core/engines.html#sqlalchemy.create_engine
+  - name: schema
+    type: string
+    required: false
+    form: form
+    label:
+      en_US: Schema
+    human_description:
+      en_US:  Schema name. If `schema` is left empty, the database's default schema(like the `public` of postgresql) is used, else the named schema is searched
+      zh_Hans: 数据库schema名称。如果 `schema` 留空，则使用数据库的默认schema(例如postgresql中的public)，否则使用指定的schema。
 extra:
   python:
       source: tools/table_schema.py
