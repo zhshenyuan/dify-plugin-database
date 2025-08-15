@@ -7,6 +7,7 @@ import records
 from sqlalchemy import text
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
+from tools.db_utils import fix_db_uri_encoding
 
 
 class SQLExecuteTool(Tool):
@@ -14,6 +15,10 @@ class SQLExecuteTool(Tool):
         db_uri = tool_parameters.get("db_uri") or self.runtime.credentials.get("db_uri")
         if not db_uri:
             raise ValueError("Database URI is not provided.")
+        
+        # 修复 db_uri 中的特殊字符编码问题
+        db_uri = fix_db_uri_encoding(db_uri)
+        
         query = tool_parameters.get("query").strip()
         format = tool_parameters.get("format", "json")
         config_options = tool_parameters.get("config_options") or "{}"
