@@ -1,11 +1,14 @@
 from collections.abc import Generator
 from typing import Any
 import json
+import re
+from urllib.parse import quote_plus
 
 from sqlalchemy import create_engine, inspect
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from dify_plugin.entities.model.message import SystemPromptMessage, UserPromptMessage
+from tools.db_utils import fix_db_uri_encoding
 
 SYSTEM_PROMPT_TEMPLATE = """
 You are a {dialect} expert. Your task is to generate an executable {dialect} query based on the user's question.
@@ -63,6 +66,10 @@ class QueryTool(Tool):
         db_uri = tool_parameters.get("db_uri") or self.runtime.credentials.get("db_uri")
         if not db_uri:
             raise ValueError("Database URI is not provided.")
+        
+        # 修复 db_uri 中的特殊字符编码问题
+        db_uri = fix_db_uri_encoding(db_uri)
+        
         config_options = tool_parameters.get("config_options") or "{}"
         try:
             config_options = json.loads(config_options)
