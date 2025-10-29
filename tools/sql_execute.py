@@ -2,9 +2,10 @@ from collections.abc import Generator
 from typing import Any
 import re
 import json
+import pandas as pd
+from io import BytesIO
 
-import records
-from sqlalchemy import text
+from sqlalchemy import create_engine, text
 from dify_plugin import Tool
 from dify_plugin.entities.tool import ToolInvokeMessage
 from tools.db_utils import fix_db_uri_encoding
@@ -16,40 +17,51 @@ class SQLExecuteTool(Tool):
         if not db_uri:
             raise ValueError("Database URI is not provided.")
         
-        # 修复 db_uri 中的特殊字符编码问题
         db_uri = fix_db_uri_encoding(db_uri)
-        
         query = tool_parameters.get("query").strip()
         format = tool_parameters.get("format", "json")
-        config_options = tool_parameters.get("config_options") or "{}"
+        config_options = tool_parameters.get("config_options") or '{"pool_size": 1, "max_overflow": 0, "pool_pre_ping": true, "pool_recycle": 3600}'
+        
         try:
             config_options = json.loads(config_options)
         except json.JSONDecodeError:
             raise ValueError("Invalid JSON format for Connect Config")
-        db = records.Database(db_uri, **config_options)
-
+        
+        # 创建引擎
+        engine = create_engine(db_uri, **config_options)
+        
         try:
             if re.match(r'^\s*(SELECT|WITH)\s+', query, re.IGNORECASE):
-                rows = db.query(query)
+                # 使用 pandas 读取数据
+                with engine.connect() as conn:
+                    df = pd.read_sql(text(query), conn)
+                
                 if format == "json":
-                    result = rows.as_dict()
+                    result = df.to_dict(orient='records')
                     yield self.create_json_message({"result": result})
+                    
                 elif format == "md":
-                    result = str(rows.dataset)
+                    result = df.to_markdown(index=False)
                     yield self.create_text_message(result)
+                    
                 elif format == "csv":
-                    result = rows.export("csv").encode()
+                    result = df.to_csv(index=False).encode()
                     yield self.create_blob_message(
                         result, meta={"mime_type": "text/csv", "filename": "result.csv"}
                     )
+                    
                 elif format == "yaml":
-                    result = rows.export("yaml").encode()
+                    import yaml
+                    result = yaml.dump(df.to_dict(orient='records')).encode()
                     yield self.create_blob_message(
-                        result,
-                        meta={"mime_type": "text/yaml", "filename": "result.yaml"},
+                        result, meta={"mime_type": "text/yaml", "filename": "result.yaml"}
                     )
+                    
                 elif format == "xlsx":
-                    result = rows.export("xlsx")
+                    output = BytesIO()
+                    with pd.ExcelWriter(output, engine='openpyxl') as writer:
+                        df.to_excel(writer, index=False)
+                    result = output.getvalue()
                     yield self.create_blob_message(
                         result,
                         meta={
@@ -57,26 +69,26 @@ class SQLExecuteTool(Tool):
                             "filename": "result.xlsx",
                         },
                     )
+                    
                 elif format == "html":
-                    result = rows.export("html").encode()
+                    result = df.to_html(index=False).encode()
                     yield self.create_blob_message(
-                        result,
-                        meta={"mime_type": "text/html", "filename": "result.html"},
+                        result, meta={"mime_type": "text/html", "filename": "result.html"}
                     )
                 else:
                     raise ValueError(f"Unsupported format: {format}")
             else:
-                with db.get_connection() as conn:
-                    trans = conn._conn.begin()
-                    try:
-                        result = conn._conn.execute(text(query))
-                        affected_rows = result.rowcount
-                        trans.commit()
-                        yield self.create_text_message(
-                            f"Query executed successfully. Affected rows: {affected_rows}"
-                        )
-                    except Exception as e:
-                        trans.rollback()
-                        yield self.create_text_message(f"Error: {str(e)}")
+                # 执行非查询语句
+                with engine.begin() as conn:
+                    result = conn.execute(text(query))
+                    affected_rows = result.rowcount
+                    yield self.create_text_message(
+                        f"Query executed successfully. Affected rows: {affected_rows}"
+                    )
+                    
+        except Exception as e:
+            yield self.create_text_message(f"Error: {str(e)}")
+            
         finally:
-            db.close()
+            # 确保连接池被完全释放
+            engine.dispose()

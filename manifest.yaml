@@ -1,6 +1,6 @@
-version: 0.0.6
+version: 0.0.7
 type: plugin
-author: hjlarry
+author: zhshenyuan
 name: database
 label:
   en_US: database

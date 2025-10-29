@@ -1,4 +1,4 @@
-dify_plugin>=0.1.0,<0.2.0
+dify_plugin
 records[all]~=0.6.0
 pymysql~=1.1.1
 pymssql~=2.3.2
