@@ -17,3 +17,5 @@ class DatabaseProvider(ToolProvider):
                 pass
         except Exception as e:
             raise ToolProviderCredentialValidationError(str(e))
+        finally:
+            SQLExecuteTool.dispose_engine(credentials.get("db_uri"))
